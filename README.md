@@ -1,1 +1,1 @@
-# VisiualQA
+# MedVisiualQA
