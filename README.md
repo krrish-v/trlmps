@@ -37,7 +37,7 @@ TRL-MPS introduces critical memory and performance optimizations for the PyTorch
 ### Installation
 
 ```bash
-git clone https://github.com/your-org/trlmps.git
+git clone https://github.com/krrish-v/trlmps.git
 cd trlmps
 pip install -e .
 ```
