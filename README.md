@@ -82,6 +82,10 @@ config = SFTConfig(
     mps_fused_loss_chunk_size=65536,       # Fused CE chunk limit (reduce if OOM)
     mps_cleanup_frequency=1,               # Background GC every N steps
     mps_eval_num_workers=0,                # Main-thread eval keeps GPU fed faster
+
+    dataloader_pin_memory=False,         # Must be False on Mac
+    dataloader_num_workers=4,            # Maximize Performance Cores
+    dataloader_prefetch_factor=4,        # Keep the GPU fed
 )
 
 trainer = SFTTrainer(
