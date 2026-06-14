@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>TRLmps</h1>
+  <h1>TrlMPS</h1>
   <h3>Transformers Reinforcement Learning — Apple Silicon (MPS) Optimized</h3>
 </div>
 
@@ -38,6 +38,10 @@ TRL-MPS introduces critical memory and performance optimizations for the PyTorch
 
 ```bash
 git clone https://github.com/krrish-v/trlmps.git
+git clone https://github.com/krrish-v/metal_liger.git
+```
+
+```bash
 cd trlmps
 pip install -e .
 ```
@@ -63,7 +67,8 @@ export OMP_NUM_THREADS=1
 TRL-MPS hooks directly into the existing TRL Trainer APIs. Just enable the MPS flags in `SFTConfig`:
 
 ```python
-from trl import SFTTrainer, SFTConfig
+import torch
+from trlmps.trl import SFTConfig, SFTTrainer
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from datasets import load_dataset
 
@@ -77,11 +82,13 @@ config = SFTConfig(
     bf16=True,                             # Use BFloat16 natively on Mac
     
     # --- TRL-MPS OPTIMIZATIONS ---
-    use_mps_optimization=True,             # Enable syncing, shape bucketing, etc.
-    mps_memory_fraction=0.9,               # Process limit (0.0 to 1.0)
-    mps_fused_loss_chunk_size=65536,       # Fused CE chunk limit (reduce if OOM)
-    mps_cleanup_frequency=1,               # Background GC every N steps
-    mps_eval_num_workers=0,                # Main-thread eval keeps GPU fed faster
+    mps_memory_fraction=0.98,             # 90% of system RAM for MPS
+    mps_fused_loss_chunk_size=8192,      # Vocab chunk size (M4 Pro optimized)
+    mps_cleanup_frequency=10,             # Predictable Memory > Optimized Queuing
+    
+    use_mps_optimization=True,
+    use_metal_liger=True,           
+    use_metal_liger_compile=True,
 
     dataloader_pin_memory=False,         # Must be False on Mac
     dataloader_num_workers=4,            # Maximize Performance Cores
