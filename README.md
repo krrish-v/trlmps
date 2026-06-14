@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>trlmps</h1>
+  <h1>TRLmps</h1>
   <h3>Transformers Reinforcement Learning — Apple Silicon (MPS) Optimized</h3>
 </div>
 
