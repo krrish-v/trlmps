@@ -121,12 +121,12 @@ Backpropagation accumulates `tr_loss += loss.detach()` every step. Over 143,000 
 
 | Model Architecture | Tested | Native Fused CE Support |
 |---|:---:|:---:|
-| **Qwen3-VL** / Qwen2-VL | ✅ | Yes (152K Vocab) |
+| **Qwen3-VL** | ✅ | Yes |
 
 | Hardware | Tested | Recommended Max Config |
 |---|:---:|---|
-| **M4 Pro (48GB)** | ✅ | SFT, 3B-4B params, Batch Size 1-2 |
-| **M4 Max (64GB)** | ✅ | SFT, 7B params, Batch Size 1-2 |
+| **M4 Pro (24, 48GB)** | ✅ | SFT, 3B-4B params|
+| **M4 Max (64GB)** | ✅ | SFT, 7B params|
 
 ---
 
